@@ -13,12 +13,15 @@ import android.widget.TextView;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBScanExpression;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedScanList;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +32,7 @@ public class FoodListFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private FoodAdapter mAdapter;
+    private List<Food> mFoods = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -48,6 +52,10 @@ public class FoodListFragment extends Fragment {
         return view;
     }
 
+//    public void updateView(){
+//        new getId.execute();
+//    }
+
     private void testing(){
         FoodLab lab = FoodLab.get(getContext());
         lab.addFood(new Food("Rice", 13.12));
@@ -55,12 +63,18 @@ public class FoodListFragment extends Fragment {
         lab.addFood(new Food("Cats", 100));
     }
 
+    private void setupAdapter() {
+        if (isAdded()) {
+            mRecyclerView.setAdapter(new FoodAdapter(mFoods));
+        }
+    }
+
     private void updateUI() {
         FoodLab lab = FoodLab.get(getContext());
-        List<Food> foods = lab.getFoods();
         new getId().execute();
+        setupAdapter();
         if(mAdapter == null){
-            mAdapter = new FoodAdapter(foods);
+            mAdapter = new FoodAdapter(mFoods);
             mRecyclerView.setAdapter(mAdapter);
         }else{
             mAdapter.notifyDataSetChanged();
@@ -120,10 +134,10 @@ public class FoodListFragment extends Fragment {
         }
     }
 
-    private class getId extends AsyncTask<Void, Void, Void> {
+    private class getId extends AsyncTask<Void, Void, List<Food>> {
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected List<Food> doInBackground(Void... params) {
 
             CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
                     getContext(),
@@ -133,17 +147,16 @@ public class FoodListFragment extends Fragment {
 
             AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
             DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
-//            mapper.save(new Food("Beef", 35.4));
-            Food food = mapper.load(Food.class, "Computers");
-//            mapper.save(food);
-//            System.out.println("calories" +food.getCalories());
-            return null;
+            DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+            PaginatedScanList<Food> result = mapper.scan(Food.class, scanExpression);
+            return result;
         }
 
-//        @Override
-//        protected void onPostExecute(String items) {
-//
-//        }
+        @Override
+        protected void onPostExecute(List<Food> items) {
+            mFoods = items;
+            setupAdapter();
+        }
 
     }
 
