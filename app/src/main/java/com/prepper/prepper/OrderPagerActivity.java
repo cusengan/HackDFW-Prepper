@@ -44,12 +44,7 @@ public class OrderPagerActivity  extends AppCompatActivity {
             @Override
             public Fragment getItem(int position) {
                 Food food = mFoods.get(position);
-                Fragment FoodListFragment = new Fragment();
-
-                Bundle args = new Bundle();
-                args.putString("Food name",food.getFoodName());
-                FoodListFragment.setArguments(args);
-                return FoodListFragment;
+                return OrderFragment.newInstance(food.getFoodName());
             }
 
             @Override
