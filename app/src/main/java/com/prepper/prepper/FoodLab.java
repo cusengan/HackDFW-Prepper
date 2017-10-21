@@ -30,6 +30,10 @@ public class FoodLab {
         return mFoods;
     }
 
+    public void setFoods(List<Food> list){
+        mFoods = list;
+    }
+
     public void addFood(Food food){
         mFoods.add(food);
     }
