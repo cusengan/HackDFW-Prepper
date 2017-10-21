@@ -133,8 +133,10 @@ public class FoodListFragment extends Fragment {
 
             AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
             DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
-            Food food = new Food("Pototaes", 300);
-            mapper.save(food);
+//            mapper.save(new Food("Beef", 35.4));
+            Food food = mapper.load(Food.class, "Computers");
+//            mapper.save(food);
+//            System.out.println("calories" +food.getCalories());
             return null;
         }
 
