@@ -14,19 +14,19 @@ public class Food {
         this.mCalories = mCalories;
     }
 
-    public String getmFoodName() {
+    public String getFoodName() {
         return mFoodName;
     }
 
-    public void setmFoodName(String mFoodName) {
+    public void setFoodName(String mFoodName) {
         this.mFoodName = mFoodName;
     }
 
-    public double getmCalories() {
+    public double getCalories() {
         return mCalories;
     }
 
-    public void setmCalories(double mCalories) {
+    public void setCalories(double mCalories) {
         this.mCalories = mCalories;
     }
 }
