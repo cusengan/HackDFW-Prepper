@@ -82,7 +82,7 @@ public class FoodListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Intent intent = OrderActivity.newIntent(getActivity(), mFood.getFoodName());
+            Intent intent = OrderPagerActivity.newIntent(getActivity(), mFood.getFoodName());
             startActivity(intent);
         }
     }
