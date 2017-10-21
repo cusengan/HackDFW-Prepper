@@ -20,6 +20,11 @@ public class Food {
         this.mProtein = mProtein;
     }
 
+    public Food(String mFoodName, double mCalories){
+        this.mFoodName = mFoodName;
+        this.mCalories = mCalories;
+    }
+
     public String getFoodName() {
         return mFoodName;
     }
