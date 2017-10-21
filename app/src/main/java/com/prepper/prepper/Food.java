@@ -25,6 +25,11 @@ public class Food {
 //        this.mProtein = mProtein;
 //    }
 
+    public Food(){
+        mFoodName = "food";
+        mCalories = 0;
+    }
+
     public Food(String mFoodName, double mCalories){
         this.mFoodName = mFoodName;
         this.mCalories = mCalories;
