@@ -1,6 +1,7 @@
 package com.prepper.prepper;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+
 
 import org.w3c.dom.Text;
 
@@ -51,7 +58,7 @@ public class FoodListFragment extends Fragment {
     private void updateUI() {
         FoodLab lab = FoodLab.get(getContext());
         List<Food> foods = lab.getFoods();
-
+        new getId().execute();
         if(mAdapter == null){
             mAdapter = new FoodAdapter(foods);
             mRecyclerView.setAdapter(mAdapter);
@@ -111,6 +118,31 @@ public class FoodListFragment extends Fragment {
         public int getItemCount() {
             return mFoods.size();
         }
+    }
+
+    private class getId extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
+                    getContext(),
+                    "us-east-1:2a52890a-4b46-4922-9624-3419adad9e02", // Identity pool ID
+                    Regions.US_EAST_1 // Region
+            );
+
+            AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
+            DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
+            Food food = new Food("Pototaes", 300);
+            mapper.save(food);
+            return null;
+        }
+
+//        @Override
+//        protected void onPostExecute(String items) {
+//
+//        }
+
     }
 
 

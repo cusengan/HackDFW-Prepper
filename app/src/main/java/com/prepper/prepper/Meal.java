@@ -19,10 +19,10 @@ public class Meal {
     private List<Food> mFoods;
 
     public Meal(List<Food> foodList){
-        calculateCals(foodList);
-        calculateCarbs(foodList);
-        calculateProtein(foodList);
-        calculateFats(foodList);
+//        calculateCals(foodList);
+//        calculateCarbs(foodList);
+//        calculateProtein(foodList);
+//        calculateFats(foodList);
     }
 
     private void calculateCals(List<Food> foodList){
@@ -32,26 +32,26 @@ public class Meal {
         }
     }
 
-    private void calculateCarbs(List<Food> foodList){
-        this.mCarbs = 0;
-        for(Food food: foodList){
-            this.mCarbs += food.getCarbs();
-        }
-    }
-
-    private void calculateFats(List<Food> foodList){
-        this.mFats = 0;
-        for(Food food: foodList){
-            this.mFats += food.getFats();
-        }
-    }
-
-    private void calculateProtein(List<Food> foodList){
-        this.mProtein = 0;
-        for(Food food: foodList){
-            this.mProtein += food.getProtein();
-        }
-    }
+//    private void calculateCarbs(List<Food> foodList){
+//        this.mCarbs = 0;
+//        for(Food food: foodList){
+//            this.mCarbs += food.getCarbs();
+//        }
+//    }
+//
+//    private void calculateFats(List<Food> foodList){
+//        this.mFats = 0;
+//        for(Food food: foodList){
+//            this.mFats += food.getFats();
+//        }
+//    }
+//
+//    private void calculateProtein(List<Food> foodList){
+//        this.mProtein = 0;
+//        for(Food food: foodList){
+//            this.mProtein += food.getProtein();
+//        }
+//    }
 
     public String getmName() {
         return mName;
