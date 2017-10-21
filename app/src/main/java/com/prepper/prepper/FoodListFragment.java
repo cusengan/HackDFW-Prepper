@@ -59,7 +59,7 @@ public class FoodListFragment extends Fragment {
         }
     }
 
-    private class FoodHolder extends RecyclerView.ViewHolder{
+    private class FoodHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private Food mFood;
 
@@ -76,6 +76,11 @@ public class FoodListFragment extends Fragment {
             mFood = food;
             mFoodName.setText(mFood.getFoodName());
             mCalories.setText(String.valueOf(mFood.getCalories()));
+
+        }
+
+        @Override
+        public void onClick(View v) {
 
         }
     }
