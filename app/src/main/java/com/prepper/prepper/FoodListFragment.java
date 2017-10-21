@@ -1,5 +1,6 @@
 package com.prepper.prepper;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -80,8 +81,9 @@ public class FoodListFragment extends Fragment {
         }
 
         @Override
-        public void onClick(View v) {
-
+        public void onClick(View view) {
+            Intent intent = OrderActivity.newIntent(getActivity(), mFood.getFoodName());
+            startActivity(intent);
         }
     }
 
