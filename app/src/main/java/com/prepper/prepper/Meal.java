@@ -1,3 +1,5 @@
+package com.prepper.prepper;
+
 import com.prepper.prepper.Food;
 
 import java.util.List;
