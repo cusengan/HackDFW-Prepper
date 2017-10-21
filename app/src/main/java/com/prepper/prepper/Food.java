@@ -6,8 +6,8 @@ package com.prepper.prepper;
 
 public class Food {
 
-    String mFoodName;
-    double mCalories;
+    private String mFoodName;
+    private double mCalories;
 
     public Food(String mFoodName, double mCalories){
         this.mFoodName = mFoodName;
