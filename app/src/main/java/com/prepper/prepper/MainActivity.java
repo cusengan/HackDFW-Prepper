@@ -14,12 +14,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        ft.add(R.id.fragment_container, new PeopleListFragment());
-//        ft.commit();
-
         mRecommend = (TextView)findViewById(R.id.recommend_text);
-
         mRecommend.setText(R.string.recommend);
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.fragment_container, new FoodListFragment());
+        ft.commit();
+
+
     }
 }
