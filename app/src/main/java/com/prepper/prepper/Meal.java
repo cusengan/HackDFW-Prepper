@@ -1,28 +1,38 @@
 package com.prepper.prepper;
 
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBTable;
 import com.prepper.prepper.Food;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Quan on 10/21/2017.
  */
 
+@DynamoDBTable(tableName = "Meals")
 public class Meal {
 
     private String mName;
-    private String mDescription;
     private int mCal;
     private int mProtein;
     private int mCarbs;
     private int mFats;
     private List<Food> mFoods;
+    private List<String> foodNames;
 
-    public Meal(List<Food> foodList){
-//        calculateCals(foodList);
-//        calculateCarbs(foodList);
-//        calculateProtein(foodList);
-//        calculateFats(foodList);
+    public Meal(List<Food> foodList, String name){
+        calculateCals(foodList);
+        calculateCarbs(foodList);
+        calculateProtein(foodList);
+        calculateFats(foodList);
+        this.mName = name;
+    }
+
+    public Meal(){
+        ArrayList<Food> foodL = new ArrayList<>();
+        foodL.add(new Food());
     }
 
     private void calculateCals(List<Food> foodList){
@@ -35,7 +45,7 @@ public class Meal {
     private void calculateCarbs(List<Food> foodList){
         this.mCarbs = 0;
         for(Food food: foodList){
-            this.mCarbs += food.getCarbs;
+            this.mCarbs += food.getCarbs();
         }
     }
 
@@ -53,39 +63,35 @@ public class Meal {
         }
     }
 
-    public String getmName() {
+    @DynamoDBAttribute (attributeName = "Food")
+    public List<String> getFoodNames() { return foodNames; }
+
+    @DynamoDBAttribute(attributeName = "MealName")
+    public String getName() {
         return mName;
     }
 
-    public void setmName(String mName) {
+    public void setName(String mName) {
         this.mName = mName;
     }
 
-    public String getmDescription() {
-        return mDescription;
-    }
-
-    public void setmDescription(String mDescription) {
-        this.mDescription = mDescription;
-    }
-
-    public int getmCal() {
+    public int getCal() {
         return mCal;
     }
 
-    public int getmProtein() {
+    public int getProtein() {
         return mProtein;
     }
 
-    public int getmCarbs() {
+    public int getCarbs() {
         return mCarbs;
     }
 
-    public int getmFats() {
+    public int getFats() {
         return mFats;
     }
 
-    public List<Food> getmFoods() {
+    public List<Food> getFoods() {
         return mFoods;
     }
 }
