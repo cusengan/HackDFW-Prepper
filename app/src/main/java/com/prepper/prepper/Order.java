@@ -2,6 +2,7 @@ package com.prepper.prepper;
 
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBHashKey;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMarshalling;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBTable;
 
 import java.util.List;
@@ -13,42 +14,54 @@ import java.util.List;
 @DynamoDBTable(tableName = "Orders")
 public class Order {
 
-    private int mOrderNumber;
-    private List<Food> mFoodList;
+    private String mOrderNumber;
+//    private List<Food> mFoodList;
     private List<String> mFoodNames;
     private Customer mCustomer;
 
-    public Order(int num){
+    public Order(String num){
         this.mOrderNumber = num;
     }
 
-    public void setOrderNumber(int num){
-        this.mOrderNumber = num;
+    public Order(){
+        mOrderNumber = "0";
     }
+
     @DynamoDBHashKey(attributeName = "Order Number")
-    public int getOrderNumber(){
+    public String getOrderNumber(){
         return mOrderNumber;
     }
-
-    public void addFood(Food food){
-        mFoodList.add(food);
+    public void setOrderNumber(String num){
+        this.mOrderNumber = num;
     }
 
-    public List<Food> getFoodList(){
-        return mFoodList;
-    }
+//    @DynamoDBMarshalling(marshallerClass = FoodMarshaller.class)
+//    public void addFood(Food food){
+//        mFoodList.add(food);
+//    }
+//
+//    @DynamoDBMarshalling(marshallerClass = FoodMarshaller.class)
+//    public List<Food> getFoodList(){
+//        return mFoodList;
+//    }
+//    public void setFoods(List<Food> list){
+//        mFoodList = list;
+//    }
 
-    public void setCustomer(Customer customer){
-        this.mCustomer = customer;
-    }
-
-    @DynamoDBAttribute(attributeName = "UserName")
+    @DynamoDBMarshalling(marshallerClass = CustomerMarshaller.class)
     public Customer getCustomer(){
         return mCustomer;
+    }
+    public void setCustomer(Customer customer){
+        this.mCustomer = customer;
     }
 
     @DynamoDBAttribute(attributeName = "Meals")
     public List<String> getFoods(){
         return mFoodNames;
     }
+    public void setFoods(List<String> list){
+        mFoodNames = list;
+    }
+
 }

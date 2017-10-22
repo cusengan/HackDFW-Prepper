@@ -49,21 +49,10 @@ public class OrderListFragment extends Fragment {
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
-//        testing();
         updateUI();
         return view;
     }
 
-//    public void updateView(){
-//        new getId.execute();
-//    }
-
-//    private void testing(){
-//        FoodLab lab = FoodLab.get(getContext());
-//        lab.addFood(new Food("Rice", 13.12));
-//        lab.addFood(new Food("Noodles", 12.23));
-//        lab.addFood(new Food("Cats", 100));
-//    }
 
     private void setupAdapter() {
         if (isAdded()) {
@@ -86,9 +75,7 @@ public class OrderListFragment extends Fragment {
         }else{
             mAdapter.notifyDataSetChanged();
         }
-//        FoodLab lab = FoodLab.get(getContext());
-//        lab.setFoods(mFoods);
-        System.out.println(mOrders.size()+ "foodholder");
+        System.out.println("|" + mOrders.size()+ "OrderListFragment");
     }
 
     private class OrderHolder extends RecyclerView.ViewHolder{
@@ -100,8 +87,9 @@ public class OrderListFragment extends Fragment {
         private TextView mMeal;
 
         public OrderHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.food_list_row, parent, false));
-
+            super(inflater.inflate(R.layout.profile_orders, parent, false));
+            mOrderNumber = (TextView)itemView.findViewById(R.id.orderNumber);
+            mMeal = (TextView)itemView.findViewById(R.id.orderMeal);
         }
 
         public void bind(Order order){
@@ -114,7 +102,6 @@ public class OrderListFragment extends Fragment {
                 sb.append(foods.get(i));
             }
             mMeal.setText(sb.toString());
-            mOrderNumber.setText(mOrder.getOrderNumber());
 
         }
 
