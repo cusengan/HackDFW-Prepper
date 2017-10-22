@@ -99,14 +99,14 @@ public class MealListFragment extends Fragment {
 
         public void bind(Meal meal) {
             mMeal = meal;
-            mMealName.setText(mMeal.getName());
+            mMealName.setText(mMeal.getMealName());
             mMealCalories.setText(String.valueOf(mMeal.getCal()));
 
         }
 
         @Override
         public void onClick(View v) {
-            Intent intent = MealActivity.getIntent(getContext(), mMeal.getName());
+            Intent intent = MealPagerActivity.newIntent(getContext(), mMeal.getMealName());
             startActivity(intent);
         }
     }

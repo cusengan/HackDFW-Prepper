@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBHashKey;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBScanExpression;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBTable;
@@ -24,8 +25,8 @@ import static java.security.AccessController.getContext;
 @DynamoDBTable(tableName = "Meals")
 public class Meal {
 
-    private String mName;
-    private int mCal;
+    private String mMealName;
+    private double mCal;
     private int mProtein;
     private int mCarbs;
     private int mFats;
@@ -37,12 +38,13 @@ public class Meal {
         calculateCarbs(foodList);
         calculateProtein(foodList);
         calculateFats(foodList);
-        this.mName = name;
+        this.mMealName = name;
     }
 
     public Meal() {
-        this.mName = getName();
-        this.foodNames = getFoodNames();
+        this.mMealName = "meal";
+        this.foodNames = new ArrayList<>();
+        mCal = 0;
     }
 
     private void calculateCals(List<Food> foodList){
@@ -75,17 +77,20 @@ public class Meal {
 
     @DynamoDBAttribute (attributeName = "Food")
     public List<String> getFoodNames() { return foodNames; }
-
-    @DynamoDBAttribute(attributeName = "MealName")
-    public String getName() {
-        return mName;
+    public void setFoodNames(List<String> names){
+        this.foodNames = names;
     }
 
-    public void setName(String mName) {
-        this.mName = mName;
+    @DynamoDBHashKey(attributeName = "MealName")
+    public String getMealName() {
+        return mMealName;
+    }
+    public void setMealName(String mName) {
+        this.mMealName = mName;
     }
 
-    public int getCal() {
+
+    public double getCal() {
         return mCal;
     }
 
@@ -105,7 +110,5 @@ public class Meal {
         return mFoods;
     }
 
-    public void setFoodNames(List<String> names){
-        this.foodNames = names;
-    }
+
 }
