@@ -3,7 +3,8 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+                android:background="@drawable/custom_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,12 +44,14 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"/>
         <Button
-            android:text="CreateOrder"
+            android:text="Create Order"
             android:id="@+id/createOrderButton"
+            android:textColor="#545755"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="200dp"
             android:layout_width="150dp"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp"
+            android:background="@drawable/custom_button"/>
     </LinearLayout>
 
 </LinearLayout>

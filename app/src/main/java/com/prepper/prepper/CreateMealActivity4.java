@@ -27,6 +27,7 @@ public class CreateMealActivity4 extends AppCompatActivity {
 
     private String mMealName;
     private String mLastMeal;
+    private int mOrderNumber = 1;
 
     public static Intent getIntent(Context packageContext, String mealName) {
         Intent i = new Intent(packageContext, CreateMealActivity4.class);
@@ -60,6 +61,14 @@ public class CreateMealActivity4 extends AppCompatActivity {
         });
 
         mNextButton = (Button) findViewById(R.id.nextButton4);
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = PurchaseActivity.getIntent(CreateMealActivity4.this, mOrderNumber);
+                i.putExtra(TAG, mOrderNumber);
+                startActivity(i);
+            }
+        });
         mMealName = getIntent().getStringExtra(TAG);
         mFoodTitle.setText(mMealName);
 

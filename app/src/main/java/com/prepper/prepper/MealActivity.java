@@ -32,6 +32,7 @@ public class MealActivity extends AppCompatActivity{
     private List<Meal> mMeals = new ArrayList<>();
 */
 
+
     private static final String TAG = "mealactivity";
     private ImageView mImageView;
     private TextView mMealName;
@@ -39,6 +40,7 @@ public class MealActivity extends AppCompatActivity{
     private TextView mMealDescription;
     private Button mCreateOrderButton;
     private String mealName; // STRING
+    private int mOrderNumber;
 
     public static Intent getIntent(Context packageContext, String mealName) {
         Intent i = new Intent(packageContext, MealActivity.class);
@@ -60,10 +62,11 @@ public class MealActivity extends AppCompatActivity{
         mealName = getIntent().getStringExtra(TAG);
         System.out.println(mealName + " This is my name before setText");
         mMealName.setText(mealName);
+        mOrderNumber = 10;
         mCreateOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = CreateMealActivity1.getIntent(MealActivity.this, mealName);
+                Intent i = PurchaseActivity.getIntent(MealActivity.this, mOrderNumber);
                 startActivity(i);
             }
         });
