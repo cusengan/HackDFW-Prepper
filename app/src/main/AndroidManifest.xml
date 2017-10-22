@@ -18,18 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-        <activity
-            android:name=".OrderPagerActivity"
-            android:parentActivityName=".MainActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".OrderListFragment"></activity>
-=======
-        <activity android:name=".Profile"/>
-        <activity android:name=".OrderListFragment"/>
         <activity android:name=".MealActivity">
         </activity>
->>>>>>> jeet2
     </application>
 
 </manifest>
