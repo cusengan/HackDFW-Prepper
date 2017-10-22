@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.settings:
                 break;
             case R.id.profile:
-                Intent i = Profile.newIntent(getApplicationContext(), userName);
+                Intent i = ProfileActivity.newIntent(getApplicationContext(), userName);
                 startActivity(i);
                 break;
 

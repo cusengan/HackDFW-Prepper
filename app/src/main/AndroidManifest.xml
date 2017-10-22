@@ -21,7 +21,7 @@
         <activity
             android:name=".OrderPagerActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".Profile" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".OrderListFragment"></activity>
     </application>
 

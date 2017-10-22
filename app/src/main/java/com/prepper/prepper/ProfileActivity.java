@@ -3,20 +3,18 @@ package com.prepper.prepper;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBScanExpression;
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedScanList;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 
-import java.util.List;
-
-public class Profile extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     private static final String PROFILENAME = "profileName";
     private String userName;
@@ -29,7 +27,7 @@ public class Profile extends AppCompatActivity {
     private TextView mOrders;
 
     public static Intent newIntent(Context packageContext, String foodName){
-        Intent intent = new Intent(packageContext, Profile.class);
+        Intent intent = new Intent(packageContext, ProfileActivity.class);
         intent.putExtra(PROFILENAME, foodName);
         return intent;
     }
@@ -43,8 +41,12 @@ public class Profile extends AppCompatActivity {
         mAddress = (TextView)findViewById(R.id.address);
         mEmail = (TextView)findViewById(R.id.email);
         mOrders = (TextView)findViewById(R.id.orders);
+        mOrders = (TextView)findViewById(R.id.orders);
 
         userName = getIntent().getStringExtra(PROFILENAME);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.frame_container_orders, new OrderListFragment());
+        ft.commit();
         System.out.println(userName + "LIT");
         updateUI();
     }

@@ -2,6 +2,7 @@ package com.prepper.prepper;
 
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBHashKey;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMarshaller;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBTable;
 
 /**
@@ -9,7 +10,7 @@ import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBTable;
  */
 
 @DynamoDBTable(tableName = "Customers")
-public class Customer {
+public class Customer{
 
     private String mName;
     private double mCreditCard;
@@ -65,4 +66,5 @@ public class Customer {
     public void setEmail(String mEmail) {
         this.mEmail = mEmail;
     }
+
 }
