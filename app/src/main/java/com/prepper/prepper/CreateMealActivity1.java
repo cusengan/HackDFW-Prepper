@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -25,6 +26,7 @@ public class CreateMealActivity1 extends AppCompatActivity {
     private Button mNextButton;
 
     private String mMealName;
+    private String mNextMeal;
 
     public static Intent getIntent(Context packageContext, String mealName) {
         Intent i = new Intent(packageContext, CreateMealActivity1.class);
@@ -38,6 +40,8 @@ public class CreateMealActivity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_meal_1);
 
+        mNextMeal = "food2";              //--------------------------------------------------------------------TESTESTESTESTEST
+
         mCreateMealImage = (ImageView) findViewById(R.id.createMealImage1);
         mProgressBar = (ImageView) findViewById(R.id.progressBar1);
         mSpinner = (Spinner) findViewById(R.id.spinner1);
@@ -48,11 +52,15 @@ public class CreateMealActivity1 extends AppCompatActivity {
         mCalCount = (TextView) findViewById(R.id.calCount1);
         mBackButton = (Button) findViewById(R.id.backButton1);
         mNextButton = (Button) findViewById(R.id.nextButton1);
-
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = CreateMealActivity2.getIntent(CreateMealActivity1.this, mNextMeal);
+                startActivity(i);
+            }
+        });
         mMealName = getIntent().getStringExtra(TAG);
-
-
-
+        mFoodTitle.setText(mMealName);
 
     }
 }
