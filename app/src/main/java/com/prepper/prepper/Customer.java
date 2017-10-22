@@ -22,6 +22,9 @@ public class Customer {
         this.mBilling =  mBilling;
         this.mEmail = mEmail;
     }
+    public Customer(){
+
+    }
 
     @DynamoDBHashKey(attributeName = "UserName")
     public String getmName() {

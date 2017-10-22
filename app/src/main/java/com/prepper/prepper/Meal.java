@@ -22,13 +22,13 @@ public class Meal {
     private List<Food> mFoods;
     private List<String> foodNames;
 
-//    public Meal(List<Food> foodList, String name){
-//        calculateCals(foodList);
-//        calculateCarbs(foodList);
-//        calculateProtein(foodList);
-//        calculateFats(foodList);
-//        this.mName = name;
-//    }
+    public Meal(List<Food> foodList, String name){
+        calculateCals(foodList);
+        calculateCarbs(foodList);
+        calculateProtein(foodList);
+        calculateFats(foodList);
+        this.mName = name;
+    }
 
     public Meal(){
         ArrayList<Food> foodL = new ArrayList<>();
@@ -42,26 +42,26 @@ public class Meal {
         }
     }
 
-//    private void calculateCarbs(List<Food> foodList){
-//        this.mCarbs = 0;
-//        for(Food food: foodList){
-//            this.mCarbs += food.getCarbs();
-//        }
-//    }
-//
-//    private void calculateFats(List<Food> foodList){
-//        this.mFats = 0;
-//        for(Food food: foodList){
-//            this.mFats += food.getFats();
-//        }
-//    }
-//
-//    private void calculateProtein(List<Food> foodList){
-//        this.mProtein = 0;
-//        for(Food food: foodList){
-//            this.mProtein += food.getProtein();
-//        }
-//    }
+    private void calculateCarbs(List<Food> foodList){
+        this.mCarbs = 0;
+        for(Food food: foodList){
+            this.mCarbs += food.getCarbs();
+        }
+    }
+
+    private void calculateFats(List<Food> foodList){
+        this.mFats = 0;
+        for(Food food: foodList){
+            this.mFats += food.getFats();
+        }
+    }
+
+    private void calculateProtein(List<Food> foodList){
+        this.mProtein = 0;
+        for(Food food: foodList){
+            this.mProtein += food.getProtein();
+        }
+    }
 
     @DynamoDBAttribute (attributeName = "Food")
     public List<String> getFoodNames() { return foodNames; }
