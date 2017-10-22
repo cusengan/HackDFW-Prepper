@@ -23,7 +23,7 @@ public class Customer {
         this.mEmail = mEmail;
     }
 
-    @DynamoDBHashKey(attributeName = "")
+    @DynamoDBHashKey(attributeName = "UserName")
     public String getmName() {
         return mName;
     }

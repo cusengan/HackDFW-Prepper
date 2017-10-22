@@ -50,13 +50,13 @@ public class Profile extends AppCompatActivity {
     private void updateUI() {
         AsyncTask task = new getCustomer().execute();
         try{
-            mCustomer = (Customer)task.get();
+//            mCustomer = (Customer)task.get();
 
         }catch(Exception e){
 
         }
-        mUserName.setText(mCustomer.getmName());
-        System.out.println(mCustomer.getmName());
+//        mUserName.setText(mCustomer.getmName());
+//        System.out.println(mCustomer.getmName());
     }
 
 
@@ -70,18 +70,16 @@ public class Profile extends AppCompatActivity {
                     "us-east-1:2a52890a-4b46-4922-9624-3419adad9e02", // Identity pool ID
                     Regions.US_EAST_1 // Region
             );
-
             AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
             DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
-            DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
             Customer result = mapper.load(Customer.class, userName);
 
             return result;
         }
 
         @Override
-        protected void onPostExecute(Customer items) {
-
+        protected void onPostExecute(Customer customer) {
+            mCustomer = customer;
         }
 
     }
