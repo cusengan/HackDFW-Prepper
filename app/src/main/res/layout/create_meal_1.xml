@@ -30,9 +30,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/foodTitle1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"/>
             <TextView
+                android:id="@+id/foodDescription1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
@@ -70,13 +72,13 @@
             android:layout_marginLeft="10dp"
             android:id="@+id/backButton1"
             android:layout_width="175dp"
-            android:layout_height="match_parent"
+            android:layout_height="75dp"
             android:text="Back"/>
         <Button
             android:id="@+id/nextButton1"
             android:layout_marginLeft="10dp"
             android:layout_width="175dp"
-            android:layout_height="match_parent"
+            android:layout_height="75dp"
             android:text="Next"/>
     </LinearLayout>
 
