@@ -5,18 +5,18 @@
               android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/createMealImage1"
+        android:id="@+id/createMealImage4"
         android:layout_gravity="center"
         android:layout_width="250dp"
         android:layout_height="150dp"/>
 
     <ImageView
-        android:id="@+id/progressBar1"
+        android:id="@+id/progressBar4"
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
 
     <Spinner
-        android:id="@+id/spinner1"
+        android:id="@+id/spinner4"
         android:spinnerMode="dropdown"
         android:layout_marginRight="100dp"
         android:layout_width="match_parent"
@@ -30,11 +30,11 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/foodTitle1"
+                android:id="@+id/foodTitle4"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"/>
             <TextView
-                android:id="@+id/foodDescription1"
+                android:id="@+id/foodDescription4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
@@ -49,19 +49,19 @@
                 android:text="Qty"
                 android:gravity="center"/>
             <Spinner
-                android:id="@+id/spinnerQty1"
+                android:id="@+id/spinnerQty4"
                 android:spinnerMode="dropdown"
                 android:layout_width="50dp"
                 android:layout_height="40dp"/>
             <Button
-                android:id="@+id/addButton1"
+                android:id="@+id/addButton4"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="Add"/>
         </LinearLayout>
     </LinearLayout>
     <TextView
-        android:id="@+id/calCount1"
+        android:id="@+id/calCount4"
         android:layout_width="match_parent"
         android:layout_height="35dp"/>
     <LinearLayout
@@ -70,12 +70,12 @@
         android:layout_height="match_parent">
         <Button
             android:layout_marginLeft="10dp"
-            android:id="@+id/backButton1"
+            android:id="@+id/backButton4"
             android:layout_width="175dp"
             android:layout_height="75dp"
             android:text="Back"/>
         <Button
-            android:id="@+id/nextButton1"
+            android:id="@+id/nextButton4"
             android:layout_marginLeft="10dp"
             android:layout_width="175dp"
             android:layout_height="75dp"

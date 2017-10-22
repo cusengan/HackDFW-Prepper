@@ -18,10 +18,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".MealActivity" />
+        
         <activity android:name=".MealPagerActivity" />
         <activity android:name=".BuyActivity"></activity>
+        <activity android:name=".ProfileActivity"/>
+        <activity android:name=".MealActivity">
+        </activity>
+        <activity android:name=".CreateMealActivity1">
+        </activity>
+        <activity android:name=".CreateMealActivity2">
+        </activity>
+        <activity android:name=".CreateMealActivity3">
+        </activity>
+        <activity android:name=".CreateMealActivity4">
+        </activity>
     </application>
 
 </manifest>

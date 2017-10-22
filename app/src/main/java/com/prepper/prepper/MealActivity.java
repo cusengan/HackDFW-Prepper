@@ -25,7 +25,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MealActivity extends AppCompatActivity {
+public class MealActivity extends AppCompatActivity{
 /*
     private RecyclerView mRecyclerView;
     private MealActivity.MealAdapter mAdapter;
@@ -40,9 +40,10 @@ public class MealActivity extends AppCompatActivity {
     private Button mCreateOrderButton;
     private String mealName; // STRING
 
-    public static Intent getIntent(Context packageContext, String foodName) {
+    public static Intent getIntent(Context packageContext, String mealName) {
         Intent i = new Intent(packageContext, MealActivity.class);
-        i.putExtra(TAG, foodName);
+        System.out.println(mealName + " this is the meal name in getIntent");
+        i.putExtra(TAG,mealName);
         return i;
     }
 
@@ -57,6 +58,14 @@ public class MealActivity extends AppCompatActivity {
         mMealDescription = (TextView) findViewById(R.id.mealDescription);
         mCreateOrderButton = (Button) findViewById(R.id.createOrderButton);
         mealName = getIntent().getStringExtra(TAG);
+        System.out.println(mealName + " This is my name before setText");
         mMealName.setText(mealName);
+        mCreateOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = CreateMealActivity1.getIntent(MealActivity.this, mealName);
+                startActivity(i);
+            }
+        });
     }
 }
