@@ -16,6 +16,9 @@ public class Food {
     private double mFats;
     private double mCarbs;
     private double mProtein;
+    private boolean isMeat;
+    private boolean isVegatable;
+    private boolean isGrain;
 
     public Food(String mFoodName, double mCalories, double mFats, double mCarbs, double mProtein){
         this.mFoodName = mFoodName;
@@ -70,4 +73,29 @@ public class Food {
     public double getProtein() { return mProtein; }
 
     public void setProtein(double mProtein) { this.mProtein = mProtein; }
+
+    @DynamoDBAttribute(attributeName = "Meat")
+    public boolean isMeat() {
+        return isMeat;
+    }
+
+    public void setMeat(boolean meat) {
+        isMeat = meat;
+    }
+    @DynamoDBAttribute(attributeName = "Vegatable")
+    public boolean isVegatable() {
+        return isVegatable;
+    }
+
+    public void setVegatable(boolean vegatable) {
+        isVegatable = vegatable;
+    }
+    @DynamoDBAttribute(attributeName = "Grain")
+    public boolean isGrain() {
+        return isGrain;
+    }
+
+    public void setGrain(boolean grain) {
+        isGrain = grain;
+    }
 }
