@@ -13,11 +13,11 @@ public class Food {
 
     private String mFoodName;
     private double mCalories;
-    private int mFats;
-    private int mCarbs;
-    private int mProtein;
+    private double mFats;
+    private double mCarbs;
+    private double mProtein;
 
-    public Food(String mFoodName, double mCalories, int mFats, int mCarbs, int mProtein){
+    public Food(String mFoodName, double mCalories, double mFats, double mCarbs, double mProtein){
         this.mFoodName = mFoodName;
         this.mCalories = mCalories;
         this.mCarbs = mCarbs;
@@ -55,19 +55,19 @@ public class Food {
     public void setCalories(double mCalories) {
         this.mCalories = mCalories;
     }
-//
-//    @DynamoDBAttribute(attributeName = "Fat")
-//    public int getFats() { return mFats; }
-//
-//    public void setFats(int mFats) { this.mFats = mFats; }
+
+    @DynamoDBAttribute(attributeName = "Fat")
+    public double getFats() { return mFats; }
+
+    public void setFats(double mFats) { this.mFats = mFats; }
 
     @DynamoDBAttribute(attributeName = "Carb")
-    public int getCarbs() { return mCarbs; }
+    public double getCarbs() { return mCarbs; }
 
-    public void setCarbs(int mCarbs) { this.mCarbs = mCarbs; }
-//
-//    @DynamoDBAttribute(attributeName = "Protein")
-//    public int getProtein() { return mProtein; }
-//
-//    public void setProtein(int mProtein) { this.mProtein = mProtein; }
+    public void setCarbs(double mCarbs) { this.mCarbs = mCarbs; }
+
+    @DynamoDBAttribute(attributeName = "Protein")
+    public double getProtein() { return mProtein; }
+
+    public void setProtein(double mProtein) { this.mProtein = mProtein; }
 }
