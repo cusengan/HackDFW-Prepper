@@ -104,4 +104,8 @@ public class Meal {
     public List<Food> getFoods() {
         return mFoods;
     }
+
+    public void setFoodNames(List<String> names){
+        this.foodNames = names;
+    }
 }

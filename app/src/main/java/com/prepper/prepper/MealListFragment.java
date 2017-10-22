@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,21 +50,10 @@ public class MealListFragment extends Fragment {
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
-//        testing();
         updateUI();
         return view;
     }
 
-//    public void updateView(){
-//        new getId.execute();
-//    }
-
-//    private void testing(){
-//        MealLab lab = MealLab.get(getContext());
-//        lab.addFood(new Meal("Rice", 13.12));
-//        lab.addFood(new Food("Noodles", 12.23));
-//        lab.addFood(new Food("Cats", 100));
-//    }
 
     private void setupAdapter() {
         if (isAdded()) {
@@ -70,66 +61,56 @@ public class MealListFragment extends Fragment {
         }
     }
 
-    public void setList(List<Meal> list){
-        mMeals = list;
-        System.out.println(mMeals.size() + "NEW ARRAY");
-        FoodLab lab = FoodLab.get(getContext());
-        lab.setFoods(mFoods);
-    }
 
     private void updateUI() {
         AsyncTask task = new getId().execute();
         try{
-            mFoods = (List<Food>)task.get();
+            mMeals = (List<Meal>)task.get();
 
         }catch(Exception e){
 
         }
 //        setupAdapter();
         if(mAdapter == null){
-            mAdapter = new FoodAdapter(mFoods);
+            mAdapter = new MealAdapter(mMeals);
             mRecyclerView.setAdapter(mAdapter);
         }else{
             mAdapter.notifyDataSetChanged();
         }
-//        FoodLab lab = FoodLab.get(getContext());
-//        lab.setFoods(mFoods);
-        System.out.println(mFoods.size()+ "foodholder");
+
     }
 
-    private class FoodHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    private class MealHolder extends RecyclerView.ViewHolder {
 
         private Meal mMeal;
 
-        private TextView mFoodName;
-        private TextView mCalories;
+        private ImageView mImageView;
+        private TextView mMealName;
+        private TextView mMealCalories;
+        private TextView mMealDescription;
+        private Button mCreateOrderButton;
 
-        public FoodHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.food_list_row, parent, false));
-            itemView.setOnClickListener(this);
+        public MealHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.activity_order, parent, false));
 
-            mFoodName = (TextView)itemView.findViewById(R.id.foodName);
-            mCalories = (TextView)itemView.findViewById(R.id.foodCalories);
+            mImageView = (ImageView) itemView.findViewById(R.id.imageView);
+            mMealName = (TextView)itemView.findViewById(R.id.mealName);
+            mMealCalories = (TextView)itemView.findViewById(R.id.mealCalories);
+            mMealDescription = (TextView) itemView.findViewById(R.id.mealDescription);
+            mCreateOrderButton = (Button) itemView.findViewById(R.id.createOrderButton);
         }
 
-        public void bind(Food food){
-            mFood = food;
-            mFoodName.setText(mMeal.getName());
-            mCalories.setText(String.valueOf(Meal.getCalories()));
+        public void bind(Meal meal) {
+            mMeal = meal;
+            mMealName.setText(mMeal.getName());
+            mMealCalories.setText(String.valueOf(mMeal.getCal()));
 
-        }
-
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(getActivity(), "hi!", Toast.LENGTH_LONG).show();
-            Intent intent = OrderPagerActivity.newIntent(getActivity(), mMeal.getName());
-            startActivity(intent);
         }
     }
 
     private class MealAdapter extends RecyclerView.Adapter<MealHolder>{
 
-        private List<Food> mFoods;
+        private List<Meal> mMeals;
 
         public MealAdapter(List<Meal> meals){
             mMeals = meals;
@@ -168,14 +149,12 @@ public class MealListFragment extends Fragment {
             DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
             DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
             PaginatedScanList<Meal> result = mapper.scan(Meal.class, scanExpression);
-//            System.out.print(result.size());
             return result;
         }
 
         @Override
         protected void onPostExecute(List<Meal> items) {
             mMeals = items;
-            setList(items);
             setupAdapter();
         }
 

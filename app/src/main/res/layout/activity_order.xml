@@ -43,7 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"/>
         <Button
-            android:id="@+id/submitButton"
+            android:text="CreateOrder"
+            android:id="@+id/createOrderButton"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="200dp"
             android:layout_width="150dp"
