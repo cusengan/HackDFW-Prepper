@@ -26,6 +26,7 @@ public class Profile extends AppCompatActivity {
     private TextView mUserName;
     private TextView mAddress;
     private TextView mEmail;
+    private TextView mOrders;
 
     public static Intent newIntent(Context packageContext, String foodName){
         Intent intent = new Intent(packageContext, Profile.class);
@@ -41,6 +42,7 @@ public class Profile extends AppCompatActivity {
         mUserName = (TextView)findViewById(R.id.userName);
         mAddress = (TextView)findViewById(R.id.address);
         mEmail = (TextView)findViewById(R.id.email);
+        mOrders = (TextView)findViewById(R.id.orders);
 
         userName = getIntent().getStringExtra(PROFILENAME);
         System.out.println(userName + "LIT");
@@ -50,13 +52,14 @@ public class Profile extends AppCompatActivity {
     private void updateUI() {
         AsyncTask task = new getCustomer().execute();
         try{
-//            mCustomer = (Customer)task.get();
+            mCustomer = (Customer)task.get();
 
         }catch(Exception e){
 
         }
-//        mUserName.setText(mCustomer.getmName());
-//        System.out.println(mCustomer.getmName());
+        mUserName.setText(mCustomer.getName());
+        mAddress.setText(mCustomer.getBilling());
+        mEmail.setText(mCustomer.getEmail());
     }
 
 
@@ -67,7 +70,7 @@ public class Profile extends AppCompatActivity {
 
             CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
                     getApplicationContext(),
-                    "us-east-1:2a52890a-4b46-4922-9624-3419adad9e02", // Identity pool ID
+                    "us-east-1:dfcd259e-839e-4393-b80e-287af96c1e92", // Identity pool ID
                     Regions.US_EAST_1 // Region
             );
             AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
