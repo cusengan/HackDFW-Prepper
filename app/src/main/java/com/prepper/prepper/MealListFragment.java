@@ -101,7 +101,6 @@ public class MealListFragment extends Fragment {
             mMeal = meal;
             mMealName.setText(mMeal.getMealName());
             mMealCalories.setText(String.valueOf(mMeal.getCal()));
-
         }
 
         @Override
@@ -147,7 +146,6 @@ public class MealListFragment extends Fragment {
                     "us-east-1:eeb724cc-0fe5-4fa9-9282-023995ffd07e", // Identity pool ID
                     Regions.US_EAST_1 // Region
             );
-
             AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
             DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
             DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();

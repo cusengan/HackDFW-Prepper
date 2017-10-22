@@ -89,9 +89,12 @@ public class Meal {
         this.mMealName = mName;
     }
 
-
+    @DynamoDBAttribute(attributeName = "Calories")
     public double getCal() {
         return mCal;
+    }
+    public void setCal(double calories){
+        mCal = calories;
     }
 
     public int getProtein() {
