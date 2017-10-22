@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"/>
         <Button
-            android:text="CreateOrder"
+            android:text="Create Order"
             android:id="@+id/createOrderButton"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="200dp"
