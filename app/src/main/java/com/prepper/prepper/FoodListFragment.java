@@ -46,7 +46,7 @@ public class FoodListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_prebuilt_order, container, false);
 
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
 //        testing();
         updateUI();
