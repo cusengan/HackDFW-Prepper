@@ -80,24 +80,21 @@ public class MealListFragment extends Fragment {
 
     }
 
-    private class MealHolder extends RecyclerView.ViewHolder {
+    private class MealHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private Meal mMeal;
 
         private ImageView mImageView;
         private TextView mMealName;
         private TextView mMealCalories;
-        private TextView mMealDescription;
-        private Button mCreateOrderButton;
 
-        public MealHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.activity_order, parent, false));
+        public MealHolder(LayoutInflater inflater, ViewGroup parent)  {
+            super(inflater.inflate(R.layout.meal_list_row, parent, false));
 
-            mImageView = (ImageView) itemView.findViewById(R.id.imageView);
-            mMealName = (TextView)itemView.findViewById(R.id.mealName);
-            mMealCalories = (TextView)itemView.findViewById(R.id.mealCalories);
-            mMealDescription = (TextView) itemView.findViewById(R.id.mealDescription);
-            mCreateOrderButton = (Button) itemView.findViewById(R.id.createOrderButton);
+            mImageView = (ImageView) itemView.findViewById(R.id.listImageView);
+            mMealName = (TextView)itemView.findViewById(R.id.ListMealName);
+            mMealCalories = (TextView)itemView.findViewById(R.id.ListMealCalorie);
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Meal meal) {
@@ -105,6 +102,12 @@ public class MealListFragment extends Fragment {
             mMealName.setText(mMeal.getName());
             mMealCalories.setText(String.valueOf(mMeal.getCal()));
 
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = MealActivity.getIntent(getContext(), mMeal.getName());
+            startActivity(intent);
         }
     }
 
