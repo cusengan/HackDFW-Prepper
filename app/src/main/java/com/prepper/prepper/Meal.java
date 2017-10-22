@@ -1,11 +1,21 @@
 package com.prepper.prepper;
 
+import android.os.AsyncTask;
+
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBScanExpression;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBTable;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedScanList;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.prepper.prepper.Food;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by Quan on 10/21/2017.
@@ -30,9 +40,9 @@ public class Meal {
         this.mName = name;
     }
 
-    public Meal(){
-        ArrayList<Food> foodL = new ArrayList<>();
-        foodL.add(new Food());
+    public Meal() {
+        this.mName = getName();
+        this.foodNames = getFoodNames();
     }
 
     private void calculateCals(List<Food> foodList){
@@ -93,5 +103,9 @@ public class Meal {
 
     public List<Food> getFoods() {
         return mFoods;
+    }
+
+    public void setFoodNames(List<String> names){
+        this.foodNames = names;
     }
 }

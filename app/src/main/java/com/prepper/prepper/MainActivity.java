@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         mRecommend.setText(R.string.recommend);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.fragment_container, new FoodListFragment());
+        ft.add(R.id.fragment_container, new MealListFragment());
         ft.commit();
 
 

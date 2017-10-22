@@ -23,9 +23,6 @@ public class Customer{
         this.mBilling =  mBilling;
         this.mEmail = mEmail;
     }
-    public Customer(){
-
-    }
 
     public Customer(){
         this.mName = "name";

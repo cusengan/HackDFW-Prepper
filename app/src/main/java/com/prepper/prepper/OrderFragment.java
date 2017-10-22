@@ -60,7 +60,7 @@ public class OrderFragment extends android.support.v4.app.Fragment{
         mMealDiscription = (TextView) v.findViewById(R.id.mealDescription);
 
 
-        mSubmit = (Button) v.findViewById(R.id.submitButton);
+        mSubmit = (Button) v.findViewById(R.id.createOrderButton);
         mSubmit.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent i = new Intent(Intent.ACTION_SEND);
