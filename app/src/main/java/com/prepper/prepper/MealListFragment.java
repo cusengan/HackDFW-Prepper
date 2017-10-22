@@ -29,11 +29,11 @@ import java.util.List;
  * Created by lordv on 10/21/2017.
  */
 
-public class FoodListFragment extends Fragment {
+public class MealListFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
-    private FoodAdapter mAdapter;
-    private List<Food> mFoods = new ArrayList<>();
+    private MealAdapter mAdapter;
+    private List<Meal> mMeals = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -58,21 +58,21 @@ public class FoodListFragment extends Fragment {
 //    }
 
 //    private void testing(){
-//        FoodLab lab = FoodLab.get(getContext());
-//        lab.addFood(new Food("Rice", 13.12));
+//        MealLab lab = MealLab.get(getContext());
+//        lab.addFood(new Meal("Rice", 13.12));
 //        lab.addFood(new Food("Noodles", 12.23));
 //        lab.addFood(new Food("Cats", 100));
 //    }
 
     private void setupAdapter() {
         if (isAdded()) {
-            mRecyclerView.setAdapter(new FoodAdapter(mFoods));
+            mRecyclerView.setAdapter(new MealAdapter(mMeals));
         }
     }
 
-    public void setList(List<Food> list){
-        mFoods = list;
-        System.out.println(mFoods.size() + "NEW ARRAY");
+    public void setList(List<Meal> list){
+        mMeals = list;
+        System.out.println(mMeals.size() + "NEW ARRAY");
         FoodLab lab = FoodLab.get(getContext());
         lab.setFoods(mFoods);
     }
@@ -99,7 +99,7 @@ public class FoodListFragment extends Fragment {
 
     private class FoodHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private Food mFood;
+        private Meal mMeal;
 
         private TextView mFoodName;
         private TextView mCalories;
@@ -114,67 +114,67 @@ public class FoodListFragment extends Fragment {
 
         public void bind(Food food){
             mFood = food;
-            mFoodName.setText(mFood.getFoodName());
-            mCalories.setText(String.valueOf(mFood.getCalories()));
+            mFoodName.setText(mMeal.getName());
+            mCalories.setText(String.valueOf(Meal.getCalories()));
 
         }
 
         @Override
         public void onClick(View view) {
             Toast.makeText(getActivity(), "hi!", Toast.LENGTH_LONG).show();
-            Intent intent = OrderPagerActivity.newIntent(getActivity(), mFood.getFoodName());
+            Intent intent = OrderPagerActivity.newIntent(getActivity(), mMeal.getName());
             startActivity(intent);
         }
     }
 
-    private class FoodAdapter extends RecyclerView.Adapter<FoodHolder>{
+    private class MealAdapter extends RecyclerView.Adapter<MealHolder>{
 
         private List<Food> mFoods;
 
-        public FoodAdapter(List<Food> foods){
-            mFoods = foods;
+        public MealAdapter(List<Meal> meals){
+            mMeals = meals;
         }
 
         @Override
-        public FoodHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public MealHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(getActivity());
-            return new FoodHolder(inflater, parent);
+            return new MealHolder(inflater, parent);
         }
 
         @Override
-        public void onBindViewHolder(FoodHolder holder, int position) {
-            Food food = mFoods.get(position);
-            holder.bind(food);
+        public void onBindViewHolder(MealHolder holder, int position) {
+            Meal meal = mMeals.get(position);
+            holder.bind(meal);
         }
 
         @Override
         public int getItemCount() {
-            return mFoods.size();
+            return mMeals.size();
         }
     }
 
-    private class getId extends AsyncTask<Void, Void, List<Food>> {
+    private class getId extends AsyncTask<Void, Void, List<Meal>> {
 
         @Override
-        protected List<Food> doInBackground(Void... params) {
+        protected List<Meal> doInBackground(Void... params) {
 
             CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
                     getContext(),
-                    "us-east-1:2a52890a-4b46-4922-9624-3419adad9e02", // Identity pool ID
+                    "us-east-1:eeb724cc-0fe5-4fa9-9282-023995ffd07e", // Identity pool ID
                     Regions.US_EAST_1 // Region
             );
 
             AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
             DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
             DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
-            PaginatedScanList<Food> result = mapper.scan(Food.class, scanExpression);
-            System.out.print(result.size());
+            PaginatedScanList<Meal> result = mapper.scan(Meal.class, scanExpression);
+//            System.out.print(result.size());
             return result;
         }
 
         @Override
-        protected void onPostExecute(List<Food> items) {
-            mFoods = items;
+        protected void onPostExecute(List<Meal> items) {
+            mMeals = items;
             setList(items);
             setupAdapter();
         }
