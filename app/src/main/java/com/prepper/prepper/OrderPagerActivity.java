@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewParent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,31 +20,35 @@ import java.util.List;
 
 public class OrderPagerActivity  extends AppCompatActivity {
     private static final String EXTRA_ORDER = "com.prepper.prepper.OrderActivity";
+
     private ViewPager mViewPager;
     private List<Food> mFoods;
+    private FoodLab fb;
 
-    public static Intent newIntent(Context packageContext, String name){
+    public static Intent newIntent(Context packageContext, String foodName){
         Intent intent = new Intent(packageContext, OrderPagerActivity.class);
-        intent.putExtra(EXTRA_ORDER, name);
+        intent.putExtra(EXTRA_ORDER, foodName);
         return intent;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
+        setContentView(R.layout.activity_food_pager);
 
-        String name = (String) getIntent().getSerializableExtra(EXTRA_ORDER);
-
+        String name = getIntent().getStringExtra(EXTRA_ORDER);
+        fb = FoodLab.get(getApplicationContext());
         mViewPager = (ViewPager) findViewById(R.id.food_view_pager);
 
         mFoods = FoodLab.get(this).getFoods();
+        System.out.println( fb.getFoods().size() + "ORDER");
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
 
             @Override
             public Fragment getItem(int position) {
                 Food food = mFoods.get(position);
+                System.out.println(position);
                 return OrderFragment.newInstance(food.getFoodName());
             }
 
@@ -56,6 +61,7 @@ public class OrderPagerActivity  extends AppCompatActivity {
         for(int i = 0; i < mFoods.size(); i++){
             if(mFoods.get(i).getFoodName().equals(name)){
                 mViewPager.setCurrentItem(i);
+                break;
             }
         }
     }

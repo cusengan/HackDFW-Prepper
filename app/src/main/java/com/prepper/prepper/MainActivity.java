@@ -14,8 +14,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecommend = (TextView)findViewById(R.id.recommend_text);
-        mRecommend.setText(R.string.recommend);
+//        mRecommend = (TextView)findViewById(R.id.recommend_text);
+//        mRecommend.setText(R.string.recommend);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.fragment_container, new FoodListFragment());

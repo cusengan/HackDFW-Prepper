@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
@@ -47,7 +48,7 @@ public class FoodListFragment extends Fragment {
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        testing();
+//        testing();
         updateUI();
         return view;
     }
@@ -56,12 +57,12 @@ public class FoodListFragment extends Fragment {
 //        new getId.execute();
 //    }
 
-    private void testing(){
-        FoodLab lab = FoodLab.get(getContext());
-        lab.addFood(new Food("Rice", 13.12));
-        lab.addFood(new Food("Noodles", 12.23));
-        lab.addFood(new Food("Cats", 100));
-    }
+//    private void testing(){
+//        FoodLab lab = FoodLab.get(getContext());
+//        lab.addFood(new Food("Rice", 13.12));
+//        lab.addFood(new Food("Noodles", 12.23));
+//        lab.addFood(new Food("Cats", 100));
+//    }
 
     private void setupAdapter() {
         if (isAdded()) {
@@ -69,16 +70,31 @@ public class FoodListFragment extends Fragment {
         }
     }
 
-    private void updateUI() {
+    public void setList(List<Food> list){
+        mFoods = list;
+        System.out.println(mFoods.size() + "NEW ARRAY");
         FoodLab lab = FoodLab.get(getContext());
-        new getId().execute();
-        setupAdapter();
+        lab.setFoods(mFoods);
+    }
+
+    private void updateUI() {
+        AsyncTask task = new getId().execute();
+        try{
+            mFoods = (List<Food>)task.get();
+
+        }catch(Exception e){
+
+        }
+//        setupAdapter();
         if(mAdapter == null){
             mAdapter = new FoodAdapter(mFoods);
             mRecyclerView.setAdapter(mAdapter);
         }else{
             mAdapter.notifyDataSetChanged();
         }
+//        FoodLab lab = FoodLab.get(getContext());
+//        lab.setFoods(mFoods);
+        System.out.println(mFoods.size()+ "foodholder");
     }
 
     private class FoodHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -90,6 +106,8 @@ public class FoodListFragment extends Fragment {
 
         public FoodHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.food_list_row, parent, false));
+            itemView.setOnClickListener(this);
+
             mFoodName = (TextView)itemView.findViewById(R.id.foodName);
             mCalories = (TextView)itemView.findViewById(R.id.foodCalories);
         }
@@ -103,6 +121,7 @@ public class FoodListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
+            Toast.makeText(getActivity(), "hi!", Toast.LENGTH_LONG).show();
             Intent intent = OrderPagerActivity.newIntent(getActivity(), mFood.getFoodName());
             startActivity(intent);
         }
@@ -118,7 +137,7 @@ public class FoodListFragment extends Fragment {
 
         @Override
         public FoodHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(getContext());
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
             return new FoodHolder(inflater, parent);
         }
 
@@ -149,16 +168,16 @@ public class FoodListFragment extends Fragment {
             DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
             DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
             PaginatedScanList<Food> result = mapper.scan(Food.class, scanExpression);
+            System.out.print(result.size());
             return result;
         }
 
         @Override
         protected void onPostExecute(List<Food> items) {
             mFoods = items;
+            setList(items);
             setupAdapter();
         }
 
     }
-
-
 }

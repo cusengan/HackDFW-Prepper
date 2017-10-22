@@ -15,7 +15,7 @@ import java.io.File;
  * Created by singh on 10/21/2017.
  */
 
-public class OrderFragment extends Fragment{
+public class OrderFragment extends android.support.v4.app.Fragment{
 
     private static final String ARG_FOOD_NAME = "food_name";
 
@@ -28,7 +28,7 @@ public class OrderFragment extends Fragment{
 
     public static OrderFragment newInstance(String name){
         Bundle args = new Bundle();
-        args.putSerializable(ARG_FOOD_NAME, name);
+        args.putString(ARG_FOOD_NAME, name);
 
         OrderFragment fragment = new OrderFragment();
         fragment.setArguments(args);
@@ -44,13 +44,18 @@ public class OrderFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View v = inflater.inflate(R.layout.fragment_prebuilt_order, container, false);
+        View v = inflater.inflate(R.layout.activity_order, container, false);
+        System.out.println("inorderfragment");
 
         mMealName = (TextView) v.findViewById(R.id.mealName);
+
         mMealName.setText(mFood.getFoodName());
 
         mMealCals = (TextView) v.findViewById(R.id.mealCalories);
+
         mMealCals.setText(Double.toString(mFood.getCalories()));
+
+//        mMealCals.setText("foodyfood");
 
         mMealDiscription = (TextView) v.findViewById(R.id.mealDescription);
 
