@@ -20,8 +20,9 @@
         </activity>
         <activity
             android:name=".OrderPagerActivity"
-            android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".Profile"></activity>
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".Profile" />
+        <activity android:name=".OrderListFragment"></activity>
     </application>
 
 </manifest>
