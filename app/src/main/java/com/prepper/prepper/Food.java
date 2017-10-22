@@ -55,19 +55,19 @@ public class Food {
     public void setCalories(double mCalories) {
         this.mCalories = mCalories;
     }
-
-    @DynamoDBAttribute(attributeName = "Fat")
-    public int getFats() { return mFats; }
-
-    public void setFats(int mFats) { this.mFats = mFats; }
+//
+//    @DynamoDBAttribute(attributeName = "Fat")
+//    public int getFats() { return mFats; }
+//
+//    public void setFats(int mFats) { this.mFats = mFats; }
 
     @DynamoDBAttribute(attributeName = "Carb")
     public int getCarbs() { return mCarbs; }
 
     public void setCarbs(int mCarbs) { this.mCarbs = mCarbs; }
-
-    @DynamoDBAttribute(attributeName = "Protein")
-    public int getProtein() { return mProtein; }
-
-    public void setProtein(int mProtein) { this.mProtein = mProtein; }
+//
+//    @DynamoDBAttribute(attributeName = "Protein")
+//    public int getProtein() { return mProtein; }
+//
+//    public void setProtein(int mProtein) { this.mProtein = mProtein; }
 }
