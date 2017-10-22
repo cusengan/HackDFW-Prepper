@@ -1,5 +1,6 @@
 package com.prepper.prepper;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private TextView mRecommend;
+    private String userName = "William";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.settings:
                 break;
             case R.id.profile:
+                Intent i = Profile.newIntent(getApplicationContext(), userName);
+                startActivity(i);
                 break;
 
         }
